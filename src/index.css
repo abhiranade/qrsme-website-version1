@@ -465,8 +465,189 @@ All colors MUST be HSL.
     50% { opacity: 0.8; }
   }
   
+  
   .circuit-check {
     filter: drop-shadow(0 0 8px currentColor);
+  }
+  
+  /* Contact Section Styles */
+  .data-streams {
+    background: 
+      linear-gradient(90deg, transparent 48%, hsl(var(--primary) / 0.1) 49%, hsl(var(--primary) / 0.1) 51%, transparent 52%),
+      linear-gradient(0deg, transparent 48%, hsl(var(--secondary) / 0.1) 49%, hsl(var(--secondary) / 0.1) 51%, transparent 52%);
+    background-size: 40px 40px, 60px 60px;
+    animation: data-flow 15s linear infinite;
+  }
+  
+  @keyframes data-flow {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 40px 40px, 60px 60px; }
+  }
+  
+  .circuit-pattern {
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 40% 20%, hsl(var(--secondary) / 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 60% 70%, hsl(var(--accent) / 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 80% 30%, hsl(var(--primary) / 0.2) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: circuit-pulse 4s ease-in-out infinite;
+  }
+  
+  @keyframes circuit-pulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+  }
+  
+  .qr-border-pattern {
+    border: 2px solid transparent;
+    background: 
+      linear-gradient(135deg, hsl(var(--background)), hsl(var(--background))) padding-box,
+      linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--secondary) / 0.3), hsl(var(--accent) / 0.3)) border-box;
+  }
+  
+  .terminal-window {
+    background: hsl(var(--background) / 0.8);
+    border: 1px solid hsl(var(--primary) / 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  
+  .terminal-header {
+    background: hsl(var(--muted) / 0.5);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  
+  .terminal-content {
+    background: hsl(var(--background) / 0.6);
+  }
+  
+  .flowing-qr-code {
+    animation: qr-flow 6s linear infinite;
+  }
+  
+  @keyframes qr-flow {
+    0% {
+      transform: translateX(-50%) translateY(100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-100px);
+      opacity: 0;
+    }
+  }
+  
+  .holographic-panel {
+    position: relative;
+  }
+  
+  .holographic-panel::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, 
+      hsl(var(--accent)) 0%, 
+      hsl(var(--primary)) 25%, 
+      hsl(var(--secondary)) 50%, 
+      hsl(var(--accent)) 75%, 
+      hsl(var(--primary)) 100%);
+    border-radius: 1rem;
+    opacity: 0.6;
+    animation: hologram-shift 3s linear infinite;
+    z-index: -1;
+  }
+  
+  .holographic-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: hsl(var(--background) / 0.8);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(20px);
+    z-index: -1;
+  }
+  
+  @keyframes hologram-shift {
+    0% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(180deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+  
+  .quantum-button {
+    position: relative;
+    box-shadow: 
+      0 0 20px hsl(var(--primary) / 0.3),
+      inset 0 0 20px hsl(var(--background) / 0.1);
+    animation: quantum-pulse 2s ease-in-out infinite;
+  }
+  
+  .quantum-button:hover {
+    box-shadow: 
+      0 0 30px hsl(var(--primary) / 0.5),
+      0 0 50px hsl(var(--secondary) / 0.3),
+      inset 0 0 20px hsl(var(--background) / 0.2);
+    transform: translateY(-2px);
+  }
+  
+  @keyframes quantum-pulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px hsl(var(--primary) / 0.3),
+        inset 0 0 20px hsl(var(--background) / 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px hsl(var(--primary) / 0.4),
+        0 0 40px hsl(var(--secondary) / 0.2),
+        inset 0 0 20px hsl(var(--background) / 0.1);
+    }
+  }
+  
+  .particle-overlay {
+    background: radial-gradient(circle, hsl(var(--foreground) / 0.8) 1px, transparent 1px);
+    background-size: 10px 10px;
+    animation: particle-explosion 0.6s ease-out;
+  }
+  
+  @keyframes particle-explosion {
+    0% {
+      background-size: 10px 10px;
+      opacity: 0;
+    }
+    50% {
+      background-size: 20px 20px;
+      opacity: 1;
+    }
+    100% {
+      background-size: 30px 30px;
+      opacity: 0;
+    }
+  }
+  
+  .quantum-particle {
+    animation: quantum-float 3s ease-in-out infinite;
+  }
+  
+  @keyframes quantum-float {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-20px) scale(1.2);
+      opacity: 1;
+    }
   }
     90% {
       opacity: 1;
