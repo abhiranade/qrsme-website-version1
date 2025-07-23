@@ -92,7 +92,6 @@ All colors MUST be HSL.
     --input: 240 7% 12%;
     --ring: 195 100% 50%;
   }
-}
 
 @layer base {
   * {
@@ -164,6 +163,7 @@ All colors MUST be HSL.
   .skip-to-content:focus {
     top: 6px;
   }
+}
 
 @layer components {
   .glass-morphism {
@@ -410,9 +410,15 @@ All colors MUST be HSL.
     }
     10% {
       opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
   }
-  
-  /* Product Line Section Styles */
   .qr-mesh-pattern {
     background-image: 
       radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.1) 1px, transparent 1px),
@@ -662,9 +668,14 @@ All colors MUST be HSL.
       box-shadow: 
         0 0 20px hsl(var(--primary) / 0.3),
         inset 0 0 20px hsl(var(--background) / 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px hsl(var(--primary) / 0.4),
+        0 0 40px hsl(var(--secondary) / 0.2),
+        inset 0 0 20px hsl(var(--background) / 0.1);
+    }
   }
-  
-  /* Why Choose Us Section Styles */
   .ai-brain-pattern {
     background-image: 
       radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.3) 2px, transparent 2px),
@@ -808,9 +819,29 @@ All colors MUST be HSL.
     75% { 
       transform: scale(1.05);
       filter: brightness(1.2);
+    }
   }
   
-  /* Footer Styles */
+  .icon-particle {
+    animation: particle-orbit 4s linear infinite;
+  }
+  
+  @keyframes particle-orbit {
+    0% {
+      transform: rotate(0deg) translateX(40px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg) translateX(40px) rotate(-360deg);
+      opacity: 0;
+    }
+  }
   .electric-border {
     position: relative;
     height: 2px;
@@ -1297,79 +1328,6 @@ All colors MUST be HSL.
     100% {
       background-size: 16px 16px;
       opacity: 0;
-    }
-  }
-  }
-  
-  .icon-particle {
-    animation: particle-orbit 4s linear infinite;
-  }
-  
-  @keyframes particle-orbit {
-    0% {
-      transform: rotate(0deg) translateX(40px) rotate(0deg);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(360deg) translateX(40px) rotate(-360deg);
-      opacity: 0;
-    }
-  }
-    50% {
-      box-shadow: 
-        0 0 30px hsl(var(--primary) / 0.4),
-        0 0 40px hsl(var(--secondary) / 0.2),
-        inset 0 0 20px hsl(var(--background) / 0.1);
-    }
-  }
-  
-  .particle-overlay {
-    background: radial-gradient(circle, hsl(var(--foreground) / 0.8) 1px, transparent 1px);
-    background-size: 10px 10px;
-    animation: particle-explosion 0.6s ease-out;
-  }
-  
-  @keyframes particle-explosion {
-    0% {
-      background-size: 10px 10px;
-      opacity: 0;
-    }
-    50% {
-      background-size: 20px 20px;
-      opacity: 1;
-    }
-    100% {
-      background-size: 30px 30px;
-      opacity: 0;
-    }
-  }
-  
-  .quantum-particle {
-    animation: quantum-float 3s ease-in-out infinite;
-  }
-  
-  @keyframes quantum-float {
-    0%, 100% {
-      transform: translateY(0) scale(1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translateY(-20px) scale(1.2);
-      opacity: 1;
-    }
-  }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(20px);
     }
   }
 }
