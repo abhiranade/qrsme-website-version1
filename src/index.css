@@ -126,6 +126,10 @@ All colors MUST be HSL.
     box-shadow: var(--glow-pulse);
   }
   
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--foreground) / 0.3);
+  }
+  
   .nav-link {
     @apply relative text-muted-foreground hover:text-primary transition-all duration-300;
   }
@@ -157,6 +161,35 @@ All colors MUST be HSL.
     box-shadow: 0 0 30px hsl(var(--primary) / 0.5);
   }
   
+  .hover-3d {
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-3d:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 20px 40px hsl(var(--primary) / 0.3),
+      0 0 40px hsl(var(--secondary) / 0.2);
+  }
+  
+  .qr-code-container {
+    position: relative;
+    filter: drop-shadow(0 0 30px hsl(var(--primary) / 0.4));
+  }
+  
+  .qr-code-main {
+    background: radial-gradient(circle, hsl(var(--background) / 0.9) 30%, transparent 70%);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--primary) / 0.3);
+  }
+  
+  .floating-shape {
+    animation: float 6s ease-in-out infinite;
+  }
+  
   @keyframes pulse-border {
     0%, 100% {
       border-color: hsl(var(--primary));
@@ -165,6 +198,32 @@ All colors MUST be HSL.
     50% {
       border-color: hsl(var(--primary) / 0.7);
       box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes float-particle {
+    0% {
+      transform: translateY(100vh) translateX(0px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) translateX(50px);
+      opacity: 0;
     }
   }
 }
