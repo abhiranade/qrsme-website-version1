@@ -85,8 +85,10 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-muted-foreground hover:text-primary transition-colors"
-            aria-label="Toggle mobile menu"
+            className="lg:hidden p-2 text-muted-foreground hover:text-primary transition-colors min-h-11 min-w-11"
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? (
               <X size={24} />
@@ -98,7 +100,11 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden animate-slide-down">
+          <nav 
+            className="lg:hidden animate-slide-down"
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+          >
             <div className="glass-morphism rounded-lg mt-2 p-4 space-y-3">
               {navigationItems.map((item) => (
                 <a
@@ -126,7 +132,7 @@ const Header = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>

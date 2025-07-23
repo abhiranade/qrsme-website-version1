@@ -38,10 +38,11 @@ const BackToTopButton = () => {
         isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-16 pointer-events-none'
       }`}
       onClick={scrollToTop}
-      aria-label="Back to top"
+      aria-label="Scroll back to top of page"
+      type="button"
     >
-      {/* QR Code Background */}
-      <div className="qr-background">
+      {/* QR Code Background - decorative only */}
+      <div className="qr-background" aria-hidden="true">
         <div className="grid grid-cols-5 gap-px p-2">
           {generateQRPattern().map((cell, i) => (
             <div
@@ -49,6 +50,7 @@ const BackToTopButton = () => {
               className={`w-2 h-2 ${cell ? 'bg-primary' : 'bg-transparent'} 
                 animate-pulse transition-all duration-300`}
               style={{ animationDelay: `${i * 0.05}s` }}
+              aria-hidden="true"
             />
           ))}
         </div>
@@ -56,11 +58,11 @@ const BackToTopButton = () => {
       
       {/* Arrow Icon Overlay */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <ChevronUp className="w-6 h-6 text-background" />
+        <ChevronUp className="w-6 h-6 text-background" aria-hidden="true" />
       </div>
       
-      {/* Glow Effect */}
-      <div className="absolute inset-0 qr-glow-effect rounded-xl"></div>
+      {/* Glow Effect - decorative only */}
+      <div className="absolute inset-0 qr-glow-effect rounded-xl" aria-hidden="true"></div>
     </button>
   );
 };

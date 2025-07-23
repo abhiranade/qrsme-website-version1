@@ -106,7 +106,64 @@ All colors MUST be HSL.
   html {
     scroll-behavior: smooth;
   }
-}
+  
+  /* Accessibility: Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    
+    .particle-element {
+      display: none !important;
+    }
+    
+    .floating-qr-connector,
+    .neural-node,
+    .floating-shape {
+      animation: none !important;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --primary: 210 100% 60%;
+      --secondary: 300 100% 70%;
+      --accent: 240 100% 70%;
+      --foreground: 0 0% 100%;
+      --background: 0 0% 0%;
+    }
+  }
+  
+  /* Focus visible improvements */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Skip to content link for screen readers */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+  
+  .skip-to-content:focus {
+    top: 6px;
+  }
 
 @layer components {
   .glass-morphism {
@@ -965,6 +1022,234 @@ All colors MUST be HSL.
       hsl(var(--secondary) / 0.1) 100%);
     border-radius: inherit;
     animation: card-electric-sweep 1s ease-out;
+  }
+  
+  /* Phase 4: Mobile Performance & Accessibility Optimizations */
+  
+  /* Mobile Performance Optimizations */
+  @media (max-width: 768px) {
+    /* Reduce particle count and complexity on mobile */
+    .particle-element:nth-child(n+21) {
+      display: none;
+    }
+    
+    /* Simplify 3D effects to 2D with glow on smaller screens */
+    .hover-3d,
+    .hover-3d-card,
+    .hover-3d-benefit {
+      transform: none !important;
+    }
+    
+    .hover-3d:hover,
+    .hover-3d-card:hover,
+    .hover-3d-benefit:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 16px hsl(var(--primary) / 0.2) !important;
+    }
+    
+    /* Reduce animation complexity */
+    .floating-qr-code,
+    .floating-qr-connector,
+    .neural-node {
+      animation-duration: 8s !important;
+    }
+    
+    /* Simplify gradient animations */
+    .holographic-frame::before {
+      animation: none !important;
+      background: linear-gradient(45deg, hsl(var(--primary) / 0.3), hsl(var(--secondary) / 0.3)) !important;
+    }
+    
+    /* Reduce blur effects for better performance */
+    .glass-morphism {
+      backdrop-filter: blur(8px) !important;
+    }
+    
+    /* Optimize QR code animations */
+    .mini-qr-code div,
+    .qr-background div {
+      animation-duration: 4s !important;
+    }
+    
+    /* Ensure minimum touch target sizes (44px) */
+    .nav-link,
+    .btn-neon,
+    .quantum-button,
+    .qr-back-to-top {
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Improve text readability on mobile */
+    .text-gradient {
+      background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+  
+  /* Extra small screens - further optimizations */
+  @media (max-width: 480px) {
+    /* Hide decorative elements on very small screens */
+    .circuit-pattern,
+    .ai-brain-pattern,
+    .qr-mesh-pattern {
+      display: none;
+    }
+    
+    /* Reduce particle count even more */
+    .particle-element:nth-child(n+11) {
+      display: none;
+    }
+    
+    /* Simplify card effects */
+    .benefit-card-3d,
+    .product-card {
+      border-width: 1px !important;
+      box-shadow: 0 4px 8px hsl(var(--primary) / 0.1) !important;
+    }
+    
+    /* Optimize fonts for better readability */
+    body {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+  
+  /* Accessibility Improvements */
+  
+  /* Ensure sufficient color contrast */
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+    /* Ensure minimum contrast ratio of 4.5:1 */
+  }
+  
+  /* Improve focus indicators */
+  .nav-link:focus-visible,
+  .btn-neon:focus-visible,
+  .quantum-button:focus-visible {
+    outline: 3px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 1px hsl(var(--background));
+  }
+  
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Improve button accessibility */
+  button:disabled,
+  .btn-neon:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* Better link accessibility */
+  a:not([class]) {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+  
+  a:not([class]):hover {
+    color: hsl(var(--secondary));
+  }
+  
+  /* Form accessibility improvements */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+  
+  /* High contrast border for better visibility */
+  @media (prefers-contrast: high) {
+    .glass-morphism,
+    .benefit-card,
+    .product-card {
+      border: 2px solid hsl(var(--foreground)) !important;
+    }
+  }
+  
+  /* Motion accessibility - additional specific reductions */
+  @media (prefers-reduced-motion: reduce) {
+    .electric-hover::before,
+    .data-flow-overlay,
+    .particle-overlay {
+      display: none !important;
+    }
+    
+    .typewriter-effect {
+      animation: none !important;
+    }
+    
+    /* Ensure content is still visible without animations */
+    .fade-in,
+    .scale-in,
+    .slide-in-right {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+  
+  /* Performance optimizations for older devices */
+  @media (max-device-width: 768px) and (-webkit-max-device-pixel-ratio: 1) {
+    /* Disable expensive effects on low-DPI mobile devices */
+    .blur,
+    .backdrop-filter,
+    .glass-morphism {
+      backdrop-filter: none !important;
+      background: hsl(var(--background) / 0.9) !important;
+    }
+    
+    /* Simplify shadows */
+    .glow-primary,
+    .glow-accent,
+    .glow-secondary {
+      box-shadow: 0 2px 4px hsl(var(--primary) / 0.2) !important;
+    }
+  }
+  
+  /* Dark mode accessibility */
+  @media (prefers-color-scheme: dark) {
+    /* Ensure sufficient contrast in dark mode */
+    :root {
+      --muted-foreground: 215 16% 65%; /* Increased contrast */
+    }
+  }
+  
+  /* Light mode support for better accessibility */
+  @media (prefers-color-scheme: light) {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --primary: 195 100% 40%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 320 100% 40%;
+      --secondary-foreground: 0 0% 100%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --accent: 260 84% 48%;
+      --accent-foreground: 0 0% 100%;
+      --border: 240 5.9% 90%;
+      --input: 240 5.9% 90%;
+    }
   }
   
   @keyframes card-electric-sweep {

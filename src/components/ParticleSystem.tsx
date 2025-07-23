@@ -11,8 +11,31 @@ const ParticleSystem = () => {
     speedY: number;
     opacity: number;
   }>>([]);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mediaQuery.matches);
+    
+    // Check for mobile device
+    setIsMobile(window.innerWidth <= 768);
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Don't create particles if user prefers reduced motion
+    if (reducedMotion) return;
     const createParticle = (id: number) => ({
       id,
       x: Math.random() * window.innerWidth,
@@ -24,8 +47,9 @@ const ParticleSystem = () => {
       opacity: Math.random() * 0.5 + 0.1
     });
 
-    // Create initial particles
-    const initialParticles = Array.from({ length: 50 }, (_, i) => createParticle(i));
+    // Reduce particle count on mobile for performance
+    const particleCount = isMobile ? 20 : 50;
+    const initialParticles = Array.from({ length: particleCount }, (_, i) => createParticle(i));
     setParticles(initialParticles);
 
     const animateParticles = () => {
@@ -49,9 +73,10 @@ const ParticleSystem = () => {
       );
     };
 
-    const interval = setInterval(animateParticles, 50);
+    // Slower animation on mobile for better performance
+    const interval = setInterval(animateParticles, isMobile ? 100 : 50);
     return () => clearInterval(interval);
-  }, []);
+  }, [reducedMotion, isMobile]);
 
   const generateMiniQR = () => {
     const pattern = [];
@@ -61,8 +86,15 @@ const ParticleSystem = () => {
     return pattern;
   };
 
+  // Don't render particles if user prefers reduced motion
+  if (reducedMotion) return null;
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-0">
+    <div 
+      className="fixed inset-0 pointer-events-none z-0"
+      aria-hidden="true"
+      role="presentation"
+    >
       {particles.map(particle => (
         <div
           key={particle.id}
