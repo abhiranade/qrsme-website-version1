@@ -16,11 +16,11 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
-    'Digital Smart Cards',
-    'Company',
-    'Product Line',
-    'Why Choose Us',
-    'Contact Us'
+    { name: 'Digital Smart Cards', href: '#digital-smart-cards' },
+    { name: 'Company', href: '#company' },
+    { name: 'Product Line', href: '#product-line' },
+    { name: 'Why Choose Us', href: '#why-choose-us' },
+    { name: 'Contact Us', href: '#contact-us' }
   ];
 
   return (
@@ -52,11 +52,11 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-8">
             {navigationItems.map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.name}
+                href={item.href}
                 className="nav-link text-sm font-medium"
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </nav>
@@ -93,12 +93,12 @@ const Header = () => {
             <div className="glass-morphism rounded-lg mt-2 p-4 space-y-3">
               {navigationItems.map((item) => (
                 <a
-                  key={item}
-                  href="#"
+                  key={item.name}
+                  href={item.href}
                   className="block nav-link text-sm font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item}
+                  {item.name}
                 </a>
               ))}
               <div className="pt-3 border-t border-border">

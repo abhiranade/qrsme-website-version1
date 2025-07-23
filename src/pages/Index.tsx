@@ -1,11 +1,13 @@
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import DigitalCardsSection from '@/components/DigitalCardsSection';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
+      <DigitalCardsSection />
       
       {/* Placeholder for Product Line section */}
       <section id="product-line" className="min-h-screen flex items-center justify-center bg-card">

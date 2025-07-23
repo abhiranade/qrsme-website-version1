@@ -226,4 +226,98 @@ All colors MUST be HSL.
       opacity: 0;
     }
   }
+  
+  @keyframes drift-qr {
+    0% {
+      transform: translateX(-100px) translateY(0px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.4;
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateX(calc(100vw + 100px)) translateY(-50px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  .holographic-frame {
+    position: relative;
+  }
+  
+  .holographic-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--secondary)) 25%, 
+      hsl(var(--accent)) 50%, 
+      hsl(var(--secondary)) 75%, 
+      hsl(var(--primary)) 100%);
+    border-radius: 1rem;
+    opacity: 0.6;
+    animation: hologram-rotate 4s linear infinite;
+    z-index: -1;
+  }
+  
+  .holographic-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: hsl(var(--background));
+    border-radius: 0.75rem;
+    z-index: -1;
+  }
+  
+  @keyframes hologram-rotate {
+    0% {
+      background: linear-gradient(45deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--secondary)) 25%, 
+        hsl(var(--accent)) 50%, 
+        hsl(var(--secondary)) 75%, 
+        hsl(var(--primary)) 100%);
+    }
+    25% {
+      background: linear-gradient(135deg, 
+        hsl(var(--secondary)) 0%, 
+        hsl(var(--accent)) 25%, 
+        hsl(var(--primary)) 50%, 
+        hsl(var(--accent)) 75%, 
+        hsl(var(--secondary)) 100%);
+    }
+    50% {
+      background: linear-gradient(225deg, 
+        hsl(var(--accent)) 0%, 
+        hsl(var(--primary)) 25%, 
+        hsl(var(--secondary)) 50%, 
+        hsl(var(--primary)) 75%, 
+        hsl(var(--accent)) 100%);
+    }
+    75% {
+      background: linear-gradient(315deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--accent)) 25%, 
+        hsl(var(--secondary)) 50%, 
+        hsl(var(--accent)) 75%, 
+        hsl(var(--primary)) 100%);
+    }
+    100% {
+      background: linear-gradient(45deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--secondary)) 25%, 
+        hsl(var(--accent)) 50%, 
+        hsl(var(--secondary)) 75%, 
+        hsl(var(--primary)) 100%);
+    }
+  }
+  
+  .benefit-card {
+    backdrop-filter: blur(16px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
