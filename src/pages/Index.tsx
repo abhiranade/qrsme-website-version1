@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import DigitalCardsSection from '@/components/DigitalCardsSection';
+import AboutSection from '@/components/AboutSection';
 
 const Index = () => {
   return (
@@ -8,6 +9,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <DigitalCardsSection />
+      <AboutSection />
       
       {/* Placeholder for Product Line section */}
       <section id="product-line" className="min-h-screen flex items-center justify-center bg-card">
