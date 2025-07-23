@@ -751,7 +751,84 @@ All colors MUST be HSL.
     75% { 
       transform: scale(1.05);
       filter: brightness(1.2);
+  }
+  
+  /* Footer Styles */
+  .electric-border {
+    position: relative;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      hsl(var(--primary)) 20%, 
+      hsl(var(--secondary)) 50%, 
+      hsl(var(--accent)) 80%, 
+      transparent 100%);
+    overflow: hidden;
+  }
+  
+  .electric-flow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      hsl(var(--foreground) / 0.8) 50%, 
+      transparent 100%);
+    animation: electric-flow 3s linear infinite;
+  }
+  
+  @keyframes electric-flow {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  
+  .footer-gradient {
+    background: linear-gradient(to bottom, 
+      hsl(var(--background)) 0%, 
+      hsl(240, 7%, 2%) 100%);
+    position: relative;
+  }
+  
+  .footer-link {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .footer-link:hover {
+    text-shadow: 0 0 10px currentColor;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+  
+  .electric-spark {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.6) 1px, transparent 1px);
+    background-size: 8px 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .footer-link:hover .electric-spark {
+    opacity: 1;
+    animation: spark-animation 0.6s ease-out;
+  }
+  
+  @keyframes spark-animation {
+    0% {
+      background-size: 8px 8px;
+      opacity: 0;
     }
+    50% {
+      background-size: 12px 12px;
+      opacity: 1;
+    }
+    100% {
+      background-size: 16px 16px;
+      opacity: 0;
+    }
+  }
   }
   
   .icon-particle {
