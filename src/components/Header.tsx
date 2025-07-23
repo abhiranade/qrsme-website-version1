@@ -16,12 +16,17 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
-    { name: 'Digital Smart Cards', href: '#digital-smart-cards' },
+    { name: 'Digital Smart Cards', href: '#digital-cards' },
     { name: 'Company', href: '#company' },
     { name: 'Product Line', href: '#product-line' },
     { name: 'Why Choose Us', href: '#why-choose-us' },
     { name: 'Contact Us', href: '#contact-us' }
   ];
+
+  const handleSmoothScroll = (href: string) => {
+    const element = document.querySelector(href);
+    element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <header 
@@ -54,7 +59,11 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="nav-link text-sm font-medium"
+                className="nav-link electric-hover text-sm font-medium"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSmoothScroll(item.href);
+                }}
               >
                 {item.name}
               </a>
@@ -63,14 +72,14 @@ const Header = () => {
 
           {/* Join Now Button */}
           <div className="hidden lg:block">
-            <a
-              href="https://app.qrsme.com/q/waitlist"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-neon"
-            >
-              Join Now
-            </a>
+        <a
+          href="https://app.qrsme.com/q/waitlist"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-neon electric-hover"
+        >
+          Join Now
+        </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,8 +104,12 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block nav-link text-sm font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block nav-link electric-hover text-sm font-medium py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSmoothScroll(item.href);
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   {item.name}
                 </a>
@@ -106,7 +119,7 @@ const Header = () => {
                   href="https://app.qrsme.com/q/waitlist"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-neon block text-center"
+                  className="btn-neon electric-hover block text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Join Now

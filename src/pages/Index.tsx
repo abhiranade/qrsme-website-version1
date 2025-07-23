@@ -6,10 +6,13 @@ import ProductLineSection from '@/components/ProductLineSection';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import BackToTopButton from '@/components/BackToTopButton';
+import ParticleSystem from '@/components/ParticleSystem';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <ParticleSystem />
       <Header />
       <HeroSection />
       <DigitalCardsSection />
@@ -18,6 +21,7 @@ const Index = () => {
       <WhyChooseUsSection />
       <ContactSection />
       <Footer />
+      <BackToTopButton />
     </div>
   );
 };
